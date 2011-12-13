@@ -41,7 +41,10 @@ import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
+
+import android.view.inputmethod.BaseInputConnection;
 import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputConnectionWrapper;
 
 import jackpal.androidterm2.model.TextRenderer;
 import jackpal.androidterm2.model.UpdateCallback;
@@ -289,7 +292,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
         outAttrs.inputType = mUseCookedIme ?
                 EditorInfo.TYPE_CLASS_TEXT :
                 EditorInfo.TYPE_NULL;
-        return new InputConnection() {
+        return new BaseInputConnection(this, false) {
             private boolean mInBatchEdit;
             /**
              * Used to handle composing text requests
